@@ -52,8 +52,8 @@ while (gameInProgress) {
     "which way to go choose r for Right |l for Left |D for Down U |for UP : "
   );
 
-  const newY = pathCharacterPosition.Y;
-  const newX = pathCharacterPosition.X;
+  let newY = pathCharacterPosition.Y;
+  let newX = pathCharacterPosition.X;
 
   if (move === "r") {
     newX++;
