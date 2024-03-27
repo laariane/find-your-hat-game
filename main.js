@@ -52,108 +52,34 @@ while (gameInProgress) {
     "which way to go choose r for Right |l for Left |D for Down U |for UP : "
   );
 
+  const newY = pathCharacterPosition.Y;
+  const newX = pathCharacterPosition.X;
+
   if (move === "r") {
-    if (
-      field.field[pathCharacterPosition.Y][pathCharacterPosition.X + 1] === hole
-    ) {
-      console.log("you fell into the hole");
-      gameInProgress = false;
-    } else if (
-      field.field[pathCharacterPosition.Y][pathCharacterPosition.X + 1] ===
-      undefined
-    ) {
-      console.log("out of bounds");
-      gameInProgress = false;
-    } else if (
-      field.field[pathCharacterPosition.Y][pathCharacterPosition.X + 1] === hat
-    ) {
-      console.log("you won !!");
-      gameInProgress = false;
-    } else if (
-      field.field[pathCharacterPosition.Y][pathCharacterPosition.X + 1] ===
-      fieldCharacter
-    ) {
-      field.field[pathCharacterPosition.Y][pathCharacterPosition.X + 1] =
-        pathCharacter;
-      pathCharacterPosition.X++;
-    }
+    newX++;
+  } else if (move === "d") {
+    newY++;
+  } else if (move === "u") {
+    newY--;
+  } else if (move === "l") {
+    newX--;
   }
-  if (move === "d") {
-    if (
-      field.field[pathCharacterPosition.Y + 1][pathCharacterPosition.X] === hole
-    ) {
-      console.log("you fell into the hole");
-      gameInProgress = false;
-    } else if (
-      field.field[pathCharacterPosition.Y + 1][pathCharacterPosition.X] ===
-      undefined
-    ) {
-      console.log("out of bounds");
-      gameInProgress = false;
-    } else if (
-      field.field[pathCharacterPosition.Y + 1][pathCharacterPosition.X] === hat
-    ) {
-      console.log("you won !!");
-      gameInProgress = false;
-    } else if (
-      field.field[pathCharacterPosition.Y + 1][pathCharacterPosition.X] ===
-      fieldCharacter
-    ) {
-      field.field[pathCharacterPosition.Y + 1][pathCharacterPosition.X] =
-        pathCharacter;
-      pathCharacterPosition.Y++;
-    }
-  }
-  if (move === "u") {
-    if (
-      field.field[pathCharacterPosition.Y - 1][pathCharacterPosition.X] === hole
-    ) {
-      console.log("you fell into the hole");
-      gameInProgress = false;
-    } else if (
-      field.field[pathCharacterPosition.Y - 1][pathCharacterPosition.X] ===
-      undefined
-    ) {
-      console.log("out of bounds");
-      gameInProgress = false;
-    } else if (
-      field.field[pathCharacterPosition.Y - 1][pathCharacterPosition.X] === hat
-    ) {
-      console.log("you won !!");
-      gameInProgress = false;
-    } else if (
-      field.field[pathCharacterPosition.Y - 1][pathCharacterPosition.X] ===
-      fieldCharacter
-    ) {
-      field.field[pathCharacterPosition.Y - 1][pathCharacterPosition.X] =
-        pathCharacter;
-      pathCharacterPosition.Y--;
-    }
-  }
-  if (move === "l") {
-    if (
-      field.field[pathCharacterPosition.Y][pathCharacterPosition.X - 1] === hole
-    ) {
-      console.log("you fell into the hole");
-      gameInProgress = false;
-    } else if (
-      field.field[pathCharacterPosition.Y][pathCharacterPosition.X - 1] ===
-      undefined
-    ) {
-      console.log("out of bounds");
-      gameInProgress = false;
-    } else if (
-      field.field[pathCharacterPosition.Y][pathCharacterPosition.X - 1] === hat
-    ) {
-      console.log("you won !!");
-      gameInProgress = false;
-    } else if (
-      field.field[pathCharacterPosition.Y][pathCharacterPosition.X - 1] ===
-      fieldCharacter
-    ) {
-      field.field[pathCharacterPosition.Y][pathCharacterPosition.X - 1] =
-        pathCharacter;
-      pathCharacterPosition.X--;
-    }
+
+  if (
+    field.field[newY] === undefined ||
+    field.field[newY][newX] === undefined
+  ) {
+    console.log("out of bounds");
+    gameInProgress = false;
+  } else if (field.field[newY][newX] === hole) {
+    console.log("you fell into the hole");
+    gameInProgress = false;
+  } else if (field.field[newY][newX] === hat) {
+    console.log("you won !!");
+    gameInProgress = false;
+  } else if (field.field[newY][newX] === fieldCharacter) {
+    field.field[newY][newX] = pathCharacter;
+    pathCharacterPosition.Y = newY;
+    pathCharacterPosition.X = newX;
   }
 }
